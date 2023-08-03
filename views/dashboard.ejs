@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exp Uptime</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/rippleui@1.12.1/dist/css/styles.css"/>
+
+<!-- And -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="/dist/output.css" rel="stylesheet">
+</head>
+<body>
+    <div id="loadingScreen" class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-75 z-50 transition-opacity duration-300">
+        <div class="spinner-circle"></div>
+      </div>
+      <script>
+        window.addEventListener("load", function () {
+            const loadingScreen = document.getElementById("loadingScreen");
+            loadingScreen.classList.add("hidden"); // Ekranı gizle
+        });
+      </script>
+      <style>
+        #loadingScreen {
+            opacity: 0;
+        }
+        .border-t-4 {
+            border-top-width: 4px;
+        }
+        .hidden {
+            display: none;
+        }
+      </style>
+      
+    <% if (succespopup) { %>
+        <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="bg-gray-400 fixed inset-0 bg-opacity-75 transition-opacity"></div>
+          
+            <div class="fixed inset-0 z-10 overflow-y-auto">
+              <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                  <div class="px-4 pb-4 pt-5 sm:p-6 sm:pb-4" style="background-color: rgba(28,28,28,255);">
+                    <div class="sm:flex sm:items-start">
+                      <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                        <svg class="h-6 w-6 text-green-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m7 10 2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                          </svg>
+                      </div>
+                      <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                        <h3 class="text-base font-semibold leading-6 text-green-600" id="modal-title">Başarılı</h3>
+                        <div class="mt-2">
+                          <p class="text-sm text-white"><%-succespopup%></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6" style="background-color: rgba(35,35,35,255);">
+                    <a href="/dashboard"><button id="closeModalButton" type="button" class="mt-3 inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold text-gray-200 shadow-sm ring-1 ring-inset ring-gray-200 hover:bg-gray-200 hover:text-gray-500 sm:mt-0 sm:w-auto">Tamam</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+    <% } else { %>
+        
+    <% } %>
+
+    <% if (errorpopup) { %>
+        <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="bg-gray-400 fixed inset-0 bg-opacity-75 transition-opacity"></div>
+          
+            <div class="fixed inset-0 z-10 overflow-y-auto">
+              <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                  <div class="px-4 pb-4 pt-5 sm:p-6 sm:pb-4" style="background-color: rgba(28,28,28,255);">
+                    <div class="sm:flex sm:items-start">
+                      <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                        <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                          </svg>
+                      </div>
+                      <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                        <h3 class="text-base font-semibold leading-6 text-red-600" id="modal-title">Hata</h3>
+                        <div class="mt-2">
+                          <p class="text-sm text-white"><%-errorpopup%></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6" style="background-color: rgba(35,35,35,255);">
+                    <a href="/dashboard"><button id="closeModalButton" type="button" class="mt-3 inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold text-gray-200 shadow-sm ring-1 ring-inset ring-gray-200 hover:bg-gray-200 hover:text-gray-500 sm:mt-0 sm:w-auto">Tamam</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+    <% } else { %>
+        
+    <% } %>
+
+
+    <script>
+        // Sayfa yüklendikten sonra işlevi başlat
+        document.addEventListener("DOMContentLoaded", function () {
+            // Kapatma düğmesini seç
+            const closeModalButton = document.getElementById("closeModalButton");
+    
+            // Kapatma düğmesine tıklanınca modalı kapat
+            closeModalButton.addEventListener("click", function () {
+                const modal = document.querySelector(".relative[role='dialog']");
+                modal.style.display = "none";
+            });
+        });
+    </script>
+    
+
+    <div class="flex flex-row sm:gap-10">
+        <div class="sm:w-full sm:max-w-[18rem]">
+            <input type="checkbox" id="sidebar-mobile-fixed" class="sidebar-state" />
+            <label for="sidebar-mobile-fixed" class="sidebar-overlay"></label>
+            <aside class="sidebar sidebar-fixed-left sidebar-mobile h-full justify-start max-sm:fixed max-sm:-translate-x-full">
+                <section class="sidebar-title items-center p-4">
+                    <img src="https://cdn.discordapp.com/attachments/1132588491449061426/1135922436634853488/Yeni_Proje_2.png" alt="" class="avatar">
+                    <div class="flex flex-col ml-1">
+                        <span>Exp Uptime</span>
+                        <span class="text-xs font-normal text-content2">Gelişmiş Uptime</span>
+                    </div>
+                </section>
+                <section class="sidebar-content">
+                    <nav class="menu rounded-md">
+                        <section class="menu-section px-4">
+                            <span class="menu-title">Ana Sayfa</span>
+                            <ul class="menu-items">
+                                <a href="dashboard">
+                                    <li class="menu-item menu-active">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-75" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        <span>İstatistikler</span>
+                                    </li>
+                                </a>
+                                <li>
+                                    <input type="checkbox" id="menu-1" class="menu-toggle" />
+                                    <label class="menu-item justify-between" for="menu-1">
+                                        <div class="flex gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-75" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg>
+                                            <span>Uptime</span>
+                                        </div>
+    
+                                        <span class="menu-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                            </svg>
+                                        </span>
+                                    </label>
+    
+                                    <div class="menu-item-collapse">
+                                        <div class="min-h-0">
+                                            <a href="links"><label class="menu-item ml-6">Linkler</label></a>
+                                            <a href="ekle"><label class="menu-item ml-6">Ekle</label></a>
+                                            <a href="yonetim"><label class="menu-item ml-6">Yönetim Paneli</label></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </section>
+                        <div class="divider my-0"></div>
+                        <section class="menu-section px-4">
+                            <span class="menu-title">Bizim Hakkımızda</span>
+                            <ul class="menu-items">
+                                <a href="invite">
+                                    <li class="menu-item">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="opacity-75" width="22" height="22" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+                                            <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                            <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
+                                        </svg>
+                                        Discord
+                                    </li>
+                                </a>
+                                <li>
+                                    <input type="checkbox" id="menu-2" class="menu-toggle" />
+                                    <label class="menu-item justify-between" for="menu-2">
+                                        <div class="flex gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="opacity-75" width="22" height="22" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M15 21h-9a3 3 0 0 1 -3 -3v-1h10v2a2 2 0 0 0 4 0v-14a2 2 0 1 1 2 2h-2m2 -4h-11a3 3 0 0 0 -3 3v11"></path>
+                                                <path d="M9 7l4 0"></path>
+                                                <path d="M9 11l4 0"></path>
+                                            </svg>
+                                            <span>Sözleşmeler & Kurallar</span>
+                                        </div>
+    
+                                        <span class="menu-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                            </svg>
+                                        </span>
+                                    </label>
+    
+                                    <div class="menu-item-collapse">
+                                        <div class="min-h-0">
+                                            <a href="kurallar"><label class="menu-item ml-6">Kurallar</label></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </section>
+                    </nav>
+                </section>
+                <section class="sidebar-footer justify-end bg-gray-2 pt-2">
+                    <div class="divider my-0"></div>
+                    <div class="dropdown z-50 flex h-fit w-full cursor-pointer hover:bg-gray-2">
+                        <label class="whites mx-2 flex h-fit w-full cursor-pointer p-0 hover:bg-gray-4" tabindex="0">
+                            <div class="flex flex-row gap-4 p-4">
+                                <div class="avatar-square avatar avatar-md">
+                                    <img src="<%-avatar%>" alt="avatar" />
+                                </div>
+    
+                                <div class="flex flex-col">
+                                    <span><%-username%></span>
+                                </div>
+                            </div>
+                        </label>
+                        <div class="dropdown-menu-right-top dropdown-menu ml-2">
+                            <a tabindex="-1" class="dropdown-item text-sm" href="logout">Çıkış</a>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+        </div>
+        <div class="flex w-full flex-col p-4">
+            <div class="w-fit">
+                <label for="sidebar-mobile-fixed" class="btn-primary btn sm:hidden">≡</label>
+            </div>
+        
+            <div class="flex">
+                <div class="w-72 max-w-3 p-6 bg-white rounded-lg shadow" style="background-color: rgba(28,28,28,255);">
+                    <svg class="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
+                        <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"/>
+                      </svg>
+                    <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Toplam Link Sayın</h5>
+                    <p class="mb-3 font-normal text-gray-500 dark:text-gray-400"><%-totallinks%></p>
+                    <a href="/links" class="inline-flex items-center text-blue-600 hover:underline">
+                        Linklerin
+                        <svg class="w-3 h-3 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="ml-8 w-72 max-w-3 p-6 bg-white rounded-lg shadow" style="background-color: rgba(28,28,28,255);">
+                    <svg class="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z"/>
+                    </svg>
+                    <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Planın</h5>
+                    <p class="mb-3 font-normal text-gray-500 dark:text-gray-400"><%-plan%></p>
+                    <a href="invite" class="inline-flex items-center text-blue-600 hover:underline">
+                        Discord
+                        <svg class="w-3 h-3 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="ml-8 w-72 max-w-3 p-6 bg-white rounded-lg shadow" style="background-color: rgba(28,28,28,255);">
+                    <svg class="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 19">
+                        <path d="M7.324 9.917A2.479 2.479 0 0 1 7.99 7.7l.71-.71a2.484 2.484 0 0 1 2.222-.688 4.538 4.538 0 1 0-3.6 3.615h.002ZM7.99 18.3a2.5 2.5 0 0 1-.6-2.564A2.5 2.5 0 0 1 6 13.5v-1c.005-.544.19-1.072.526-1.5H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h7.687l-.697-.7ZM19.5 12h-1.12a4.441 4.441 0 0 0-.579-1.387l.8-.795a.5.5 0 0 0 0-.707l-.707-.707a.5.5 0 0 0-.707 0l-.795.8A4.443 4.443 0 0 0 15 8.62V7.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.12c-.492.113-.96.309-1.387.579l-.795-.795a.5.5 0 0 0-.707 0l-.707.707a.5.5 0 0 0 0 .707l.8.8c-.272.424-.47.891-.584 1.382H8.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1.12c.113.492.309.96.579 1.387l-.795.795a.5.5 0 0 0 0 .707l.707.707a.5.5 0 0 0 .707 0l.8-.8c.424.272.892.47 1.382.584v1.12a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1.12c.492-.113.96-.309 1.387-.579l.795.8a.5.5 0 0 0 .707 0l.707-.707a.5.5 0 0 0 0-.707l-.8-.795c.273-.427.47-.898.584-1.392h1.12a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5ZM14 15.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/>
+                      </svg>
+                    <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Yetkin</h5>
+                    <p class="mb-3 font-normal text-gray-500 dark:text-gray-400"><%-yetki%></p>
+                    <a href="invite" class="inline-flex items-center text-blue-600 hover:underline">
+                        Discord
+                        <svg class="w-3 h-3 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <br>
+            <div class="h-72 max-w-3 p-6 rounded-lg shadow" style="background-color: rgba(28,28,28,255);">
+                <br>
+                <div class="flex">
+                    <img class="rounded-full items-center justify-start content-center self-center h-48 w-48" src="<%-avatar%>" alt="">
+                    <div>
+                        <h1 class="mt-8 ml-2 font-bold text-3xl"><%-username%></h1>
+                        <p class="ml-2 mt-6 text-lg text-gray-500 dark:text-gray-400">Toplamda <%-totallinks%> adet linki uptime ediyorsun dostum!</p>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        
+    </div>
+</body>
+</html>
