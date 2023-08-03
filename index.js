@@ -311,7 +311,7 @@ const listener = app.listen(port, "0.0.0.0", () => {
 	console.log(`Site ${listener.address().port} portunda hazır!`);
 });
 
-client.login("MTEzMDU0NzEzNTk4OTk2MDc2NA.Gb0nPF.vjqgmu0s7uRCQgeJdJdCoNWRI4SzgO2bp8MUHI");
+client.login(config.token);
 
 const path = require("path")
 const fs = require("fs")
